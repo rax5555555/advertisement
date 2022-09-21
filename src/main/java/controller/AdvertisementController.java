@@ -4,6 +4,7 @@ package controller;
 import dto.AdvertisementDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import servise.AdvertisementService;
@@ -38,6 +39,21 @@ public class AdvertisementController {
         String resultFileName = uuidFileName + "." + file.getOriginalFilename();
         file.transferTo(new File(resultFileName));
         advertisementDto.setImageFileName(resultFileName);
+        file.transferTo(new File(uploadPath + "/" + resultFileName));
         return advertisementService.create(advertisementDto);
+    }
+
+    @GetMapping("/{advertisementId}")
+    AdvertisementDto getAdvertisementById(@PathVariable long advertisementId) {
+        log.info("get advertisementId id={}", advertisementId);
+        return advertisementService.getAdvertisementById(advertisementId);
+    }
+
+    @PatchMapping("/{advertisementId}")
+    AdvertisementDto update(@RequestHeader("User-Id") long userId,
+                            @PathVariable long advertisementId,
+                            @RequestBody AdvertisementDto advertisementDto) {
+        log.info("update advertisement id={}", advertisementId);
+        return advertisementService.update(userId, advertisementId, advertisementDto);
     }
 }

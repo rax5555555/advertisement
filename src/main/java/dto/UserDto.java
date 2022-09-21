@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import model.Role;
 
 @Data
 @Builder
@@ -16,5 +17,7 @@ public class UserDto {
 
     private String email;
 
-    private String role;
+    private Role role;
+
+    private String password;
 }

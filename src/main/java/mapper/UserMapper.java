@@ -12,6 +12,7 @@ public class UserMapper {
                 .name(userDto.getName())
                 .email(userDto.getEmail())
                 .role(userDto.getRole())
+                .password(userDto.getPassword())
                 .build();
     }
 

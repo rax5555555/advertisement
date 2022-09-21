@@ -17,8 +17,6 @@ public class AdvertisementDto {
     private String description;
     private String contact;
     private Status status;
-
     private String userId;
-
     private String imageFileName;
 }
